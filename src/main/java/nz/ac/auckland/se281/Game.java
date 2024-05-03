@@ -17,10 +17,10 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.choice = choice;
     this.difficulty = difficulty;
-    roundNum += 1;
   }
 
   public void play() {
+    roundNum += 1;
     MessageCli.START_ROUND.printMessage(String.valueOf(roundNum));
     String playerFingers = "-1";
     while (playerFingers.equals("-1")) {
