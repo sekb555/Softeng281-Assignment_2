@@ -9,7 +9,7 @@ public class Game {
   protected String playerName;
   protected Choice choice;
   protected Difficulty difficulty;
-  protected int noOfGames = 0;
+  protected int roundNum = 0;
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -17,18 +17,19 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.choice = choice;
     this.difficulty = difficulty;
-    noOfGames += 1;
+    roundNum += 1;
   }
 
   public void play() {
-    MessageCli.START_ROUND.printMessage(String.valueOf(noOfGames));
+    MessageCli.START_ROUND.printMessage(String.valueOf(roundNum));
+    String playerFingers = "-1";
     MessageCli.ASK_INPUT.printMessage();
-    String playerFingers = Utils.scanner.nextLine();
-    if (!Utils.isInteger(playerFingers)
-        || Integer.parseInt(playerFingers) > 5
-        || Integer.parseInt(playerFingers) < 0) {
+    String input = Utils.scanner.nextLine();
+    if (!Utils.isInteger(input) || Integer.parseInt(input) > 5 || Integer.parseInt(input) < 0) {
       MessageCli.INVALID_INPUT.printMessage();
-      return;
+    } else {
+      playerFingers = input;
+      MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
     }
   }
 
