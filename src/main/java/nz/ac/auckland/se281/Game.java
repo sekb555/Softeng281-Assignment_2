@@ -23,6 +23,7 @@ public class Game {
 
   public void play() {
     MessageCli.START_ROUND.printMessage(String.valueOf(noOfGames));
+    MessageCli.ASK_INPUT.printMessage();
   }
 
   public void endGame() {}
