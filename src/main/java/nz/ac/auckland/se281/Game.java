@@ -24,6 +24,11 @@ public class Game {
   public void play() {
     MessageCli.START_ROUND.printMessage(String.valueOf(noOfGames));
     MessageCli.ASK_INPUT.printMessage();
+    String playerFingers = Utils.scanner.nextLine();
+    if (!Utils.isInteger(playerFingers) || Integer.parseInt(playerFingers) > 5){
+      MessageCli.INVALID_INPUT.printMessage();
+      return;
+    }
   }
 
   public void endGame() {}
