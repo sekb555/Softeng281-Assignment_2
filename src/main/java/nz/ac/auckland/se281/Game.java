@@ -23,14 +23,17 @@ public class Game {
   public void play() {
     MessageCli.START_ROUND.printMessage(String.valueOf(roundNum));
     String playerFingers = "-1";
-    MessageCli.ASK_INPUT.printMessage();
-    String input = Utils.scanner.nextLine();
-    if (!Utils.isInteger(input) || Integer.parseInt(input) > 5 || Integer.parseInt(input) < 0) {
-      MessageCli.INVALID_INPUT.printMessage();
-    } else {
-      playerFingers = input;
-      MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
+    while (playerFingers.equals("-1")) {
+      MessageCli.ASK_INPUT.printMessage();
+      String input = Utils.scanner.nextLine();
+      if (!Utils.isInteger(input) || Integer.parseInt(input) > 5 || Integer.parseInt(input) < 0) {
+        MessageCli.INVALID_INPUT.printMessage();
+      } else {
+        playerFingers = input;
+        MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
+      }
     }
+
   }
 
   public void endGame() {}
