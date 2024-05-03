@@ -7,9 +7,11 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
 
   protected String playerName;
+  protected String computerName = "HAL-9000";
   protected Choice choice;
   protected Difficulty difficulty;
-  protected int roundNum = 0;
+  protected int roundNum;
+  RandomStrategy randomStrategy = new RandomStrategy();
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -17,12 +19,17 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.choice = choice;
     this.difficulty = difficulty;
+    this.roundNum = 0;
   }
 
   public void play() {
-    roundNum += 1;
-    MessageCli.START_ROUND.printMessage(String.valueOf(roundNum));
+
     String playerFingers = "-1";
+    String computerFingers = randomStrategy.selectFingers();
+
+    roundNum += 1;
+
+    MessageCli.START_ROUND.printMessage(String.valueOf(roundNum));
     while (playerFingers.equals("-1")) {
       MessageCli.ASK_INPUT.printMessage();
       String input = Utils.scanner.nextLine();
@@ -31,9 +38,9 @@ public class Game {
       } else {
         playerFingers = input;
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
+        MessageCli.PRINT_INFO_HAND.printMessage(computerName, computerFingers);
       }
     }
-
   }
 
   public void endGame() {}
