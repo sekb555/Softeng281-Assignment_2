@@ -15,12 +15,11 @@ public class Game {
 
   /**
    * Starts a new game with the given parameters.
-   * 
+   *
    * @param difficulty
    * @param choice
    * @param options
    */
-
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     this.playerName = options[0];
@@ -30,14 +29,14 @@ public class Game {
     this.roundNum = 0;
   }
 
-  /**
-   * Plays a round of the game.
+  /** Plays a round of the game.
    * 
    */
   public void play() {
 
     String playerFingers = "-1";
     String computerFingers = randomStrategy.selectFingers();
+    int sum;
 
     roundNum += 1;
 
@@ -51,6 +50,29 @@ public class Game {
         playerFingers = input;
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
         MessageCli.PRINT_INFO_HAND.printMessage(computerName, computerFingers);
+        sum = Integer.parseInt(playerFingers) + Integer.parseInt(computerFingers);
+        findWinner(sum);
+      }
+    }
+  }
+
+/**
+ * Determines the winner of the round.
+ * 
+ * @param sum
+ */
+  public void findWinner(int sum) {
+    if (choice == Choice.ODD) {
+      if (Utils.isOdd(sum)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", computerName);
+      }
+    } else if (choice == Choice.EVEN) {
+      if (Utils.isEven(sum)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", computerName);
       }
     }
   }
