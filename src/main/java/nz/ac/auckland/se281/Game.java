@@ -6,12 +6,20 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
 
-  protected String playerName;
-  protected String computerName = "HAL-9000";
+  private String playerName;
+  private String computerName = "HAL-9000";
   protected Choice choice;
   protected Difficulty difficulty;
-  protected int roundNum;
-  RandomStrategy randomStrategy = new RandomStrategy();
+  private int roundNum;
+  private RandomStrategy randomStrategy = new RandomStrategy();
+
+  /**
+   * Starts a new game with the given parameters.
+   * 
+   * @param difficulty
+   * @param choice
+   * @param options
+   */
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
@@ -22,6 +30,10 @@ public class Game {
     this.roundNum = 0;
   }
 
+  /**
+   * Plays a round of the game.
+   * 
+   */
   public void play() {
 
     String playerFingers = "-1";
