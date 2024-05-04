@@ -26,7 +26,9 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.choice = choice;
     diffString = difficulty.toString();
+
     this.roundNum = 0;
+
     TopStategy.clear();
     new TopStategy().setChoice(choice);
   }
