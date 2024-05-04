@@ -1,10 +1,6 @@
 package nz.ac.auckland.se281;
 
-/**
- * A strategy that selects a random number of fingers.
- * 
- */
-
+/** A strategy that selects a random number of fingers. */
 public class RandomStrategy implements Strategy {
 
   @Override

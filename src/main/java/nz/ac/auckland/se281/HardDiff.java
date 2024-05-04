@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class HardDiff implements DiffInterface{
+public class HardDiff implements DiffInterface {
 
   private int roundNum;
   private String lastWinner;
@@ -11,22 +11,22 @@ public class HardDiff implements DiffInterface{
     this.roundNum = roundNum;
     this.lastWinner = lastWinner;
   }
-  
-    @Override
-    public String getFingers() {
-      Strategy current = rand;
-      if(roundNum < 3){
-        current = rand;
-      } else {
-        switch (lastWinner){
-          case ("P"):
-          if (current == top){
-              current = rand;
-          } else if (current == rand){
-              current = top;
+
+  @Override
+  public String getFingers() {
+    Strategy current = rand;
+    if (roundNum < 3) {
+      current = rand;
+    } else {
+      switch (lastWinner) {
+        case ("P"):
+          if (current == top) {
+            current = rand;
+          } else if (current == rand) {
+            current = top;
           }
-        }
       }
-      return current.selectFingers();
     }
+    return current.selectFingers();
+  }
 }

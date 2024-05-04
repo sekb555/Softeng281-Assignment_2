@@ -8,7 +8,7 @@ public class DiffFactory {
       return new EasyDiff();
     } else if (diffType.equalsIgnoreCase("Medium")) {
       return new MedDiff(roundNum);
-    } else if(diffType.equalsIgnoreCase("Hard")) {
+    } else if (diffType.equalsIgnoreCase("Hard")) {
       return new HardDiff(roundNum, lastWinner);
     } else {
       return null;

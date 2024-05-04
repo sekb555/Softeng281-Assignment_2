@@ -15,7 +15,7 @@ public class Game {
   private String lastWinner;
   private int playerWins;
   private int compWins;
-  private int gameState;
+  private int gameState = 0;
 
   /**
    * Starts a new game.
@@ -26,17 +26,18 @@ public class Game {
    */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
+    roundNum = 0;
+    lastWinner = null;
+    playerWins = 0;
+    compWins = 0;
     this.playerName = options[0];
-    MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.choice = choice;
     diffString = difficulty.toString();
-
-    this.roundNum = 0;
-
-    lastWinner = null;
     TopStategy.clear();
     new TopStategy().setChoice(choice);
-    this.gameState = 1;
+    gameState = 1;
+
+    MessageCli.WELCOME_PLAYER.printMessage(playerName);
   }
 
   /** Plays a round of the game. */
@@ -103,14 +104,15 @@ public class Game {
   public void endGame() {
     int winnerTally = playerWins - compWins;
 
-    if (gameState == 0){
+    if (gameState == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
-    } else if (gameState == 1){
-      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWins), String.valueOf(compWins));
-      MessageCli.PRINT_PLAYER_WINS.printMessage(computerName, String.valueOf(compWins), String.valueOf(playerWins));
+    } else if (gameState == 1) {
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          playerName, String.valueOf(playerWins), String.valueOf(compWins));
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          computerName, String.valueOf(compWins), String.valueOf(playerWins));
     }
-
 
     if (winnerTally < 0) {
       MessageCli.PRINT_END_GAME.printMessage(computerName);
@@ -124,12 +126,14 @@ public class Game {
   }
 
   public void showStats() {
-    if (gameState == 0){
+    if (gameState == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
-    } else if (gameState == 1){
-      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWins), String.valueOf(compWins));
-      MessageCli.PRINT_PLAYER_WINS.printMessage(computerName, String.valueOf(compWins), String.valueOf(playerWins));
+    } else if (gameState == 1) {
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          playerName, String.valueOf(playerWins), String.valueOf(compWins));
+      MessageCli.PRINT_PLAYER_WINS.printMessage(
+          computerName, String.valueOf(compWins), String.valueOf(playerWins));
     }
   }
 }
