@@ -7,23 +7,16 @@ public class TopStategy implements Strategy {
   private static int sum;
   private static Choice choice;
 
-  public static void addFingers(int fingers) {
-    boolean even = Utils.isEven(fingers);
-    if (even == true) {
-      sum += 1;
-    } else if (even == false) {
-      sum -= 1;
-    }
-  }
-
+  /**
+   * Constructor for the TopStrategy.
+   *
+   * @param newChoice
+   */
   public void setChoice(Choice newChoice) {
     choice = newChoice;
   }
 
-  public static void clear() {
-    sum = 0;
-  }
-
+  /** code for the more difficult AI strategy. */
   @Override
   public String selectFingers() {
     if (choice == Choice.EVEN) {
@@ -41,5 +34,23 @@ public class TopStategy implements Strategy {
     }
 
     return String.valueOf(Utils.random.nextInt(6));
+  }
+
+  /**
+   * adds fingers to the sum.
+   *
+   * @param fingers
+   */
+  public static void addFingers(int fingers) {
+    boolean even = Utils.isEven(fingers);
+    if (even == true) {
+      sum += 1;
+    } else if (even == false) {
+      sum -= 1;
+    }
+  }
+
+  public static void clear() {
+    sum = 0;
   }
 }

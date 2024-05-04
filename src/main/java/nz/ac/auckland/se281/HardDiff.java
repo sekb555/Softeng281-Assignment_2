@@ -7,11 +7,18 @@ public class HardDiff implements DiffInterface {
   private TopStategy top = new TopStategy();
   private RandomStrategy rand = new RandomStrategy();
 
+  /**
+   * Constructor for the hard difficulty.
+   *
+   * @param roundNum
+   * @param lastWinner
+   */
   public HardDiff(int roundNum, String lastWinner) {
     this.roundNum = roundNum;
     this.lastWinner = lastWinner;
   }
 
+  /** Gets the AI input for the hard difficulty. */
   @Override
   public String getFingers() {
     Strategy current = rand;
