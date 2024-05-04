@@ -13,6 +13,7 @@ public class Game {
   private int roundNum;
   private DiffInterface diffType;
   private String lastWinner;
+  private int GameState;
 
   /**
    * Starts a new game.
@@ -29,13 +30,19 @@ public class Game {
     diffString = difficulty.toString();
 
     this.roundNum = 0;
+
     lastWinner = null;
     TopStategy.clear();
     new TopStategy().setChoice(choice);
+    this.GameState = 1;
   }
 
   /** Plays a round of the game. */
   public void play() {
+    if (GameState == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
     roundNum += 1;
     diffType = new DiffFactory().createDiff(diffString, roundNum, lastWinner);
     String playerFingers = "-1";
