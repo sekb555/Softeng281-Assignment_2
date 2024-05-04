@@ -3,13 +3,15 @@ package nz.ac.auckland.se281;
 public class HardDiff implements DiffInterface{
 
   int roundNum;
-  public HardDiff(int roundNum) {
+  String lastWinner;
+  public HardDiff(int roundNum, String lastWinner) {
     this.roundNum = roundNum;
+    this.lastWinner = lastWinner;
   }
   
     @Override
     public String getFingers() {
-      return "3";
+      return new RandomStrategy().selectFingers();
     }
   
 }

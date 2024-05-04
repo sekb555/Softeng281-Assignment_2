@@ -12,6 +12,7 @@ public class Game {
   private String diffString;
   private int roundNum;
   private DiffInterface diffType;
+  private String lastWinner;
 
   /**
    * Starts a new game.
@@ -28,7 +29,7 @@ public class Game {
     diffString = difficulty.toString();
 
     this.roundNum = 0;
-
+    lastWinner = null;
     TopStategy.clear();
     new TopStategy().setChoice(choice);
   }
@@ -36,7 +37,7 @@ public class Game {
   /** Plays a round of the game. */
   public void play() {
     roundNum += 1;
-    diffType = new DiffFactory().createDiff(diffString, roundNum);
+    diffType = new DiffFactory().createDiff(diffString, roundNum, lastWinner);
     String playerFingers = "-1";
     String computerFingers = diffType.getFingers();
     int roundTotal;
@@ -67,14 +68,18 @@ public class Game {
   public void findWinner(int sum) {
     if (choice == Choice.ODD) {
       if (Utils.isOdd(sum)) {
+        lastWinner = playerName;
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
       } else {
+        lastWinner = computerName;
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", computerName);
       }
     } else if (choice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
+        lastWinner = playerName;
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
       } else {
+        lastWinner = computerName;
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", computerName);
       }
     }
