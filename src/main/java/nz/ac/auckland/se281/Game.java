@@ -13,7 +13,7 @@ public class Game {
   private int roundNum;
   private DiffInterface diffType;
   private String lastWinner;
-  private int GameState;
+  private int gameState;
 
   /**
    * Starts a new game.
@@ -34,12 +34,12 @@ public class Game {
     lastWinner = null;
     TopStategy.clear();
     new TopStategy().setChoice(choice);
-    this.GameState = 1;
+    this.gameState = 1;
   }
 
   /** Plays a round of the game. */
   public void play() {
-    if (GameState == 0) {
+    if (gameState == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -92,7 +92,9 @@ public class Game {
     }
   }
 
-  public void endGame() {}
+  public void endGame() {
+    gameState = 0;
+  }
 
   public void showStats() {}
 }
