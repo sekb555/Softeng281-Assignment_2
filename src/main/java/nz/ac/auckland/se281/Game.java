@@ -68,18 +68,18 @@ public class Game {
   public void findWinner(int sum) {
     if (choice == Choice.ODD) {
       if (Utils.isOdd(sum)) {
-        lastWinner = playerName;
+        lastWinner = "P";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
       } else {
-        lastWinner = computerName;
+        lastWinner = "C";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", computerName);
       }
     } else if (choice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
-        lastWinner = playerName;
+        lastWinner = "P";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
       } else {
-        lastWinner = computerName;
+        lastWinner = "C";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", computerName);
       }
     }
