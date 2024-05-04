@@ -8,13 +8,13 @@ public class Game {
 
   private String playerName;
   private String computerName = "HAL-9000";
-  protected Choice choice;
-  protected Difficulty difficulty;
+  private Choice choice;
+  private String diffString;
   private int roundNum;
-  private RandomStrategy randomStrategy = new RandomStrategy();
+  private DiffInterface diffType;
 
   /**
-   * Starts a new game with the given parameters.
+   * Starts a new game.
    *
    * @param difficulty
    * @param choice
@@ -25,20 +25,19 @@ public class Game {
     this.playerName = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
     this.choice = choice;
-    this.difficulty = difficulty;
+    diffString = difficulty.toString();
     this.roundNum = 0;
+    TopStategy.clear();
+    new TopStategy().setChoice(choice);
+    diffType = new DiffFactory().createDiff(diffString);
   }
 
-  /** Plays a round of the game.
-   * 
-   */
+  /** Plays a round of the game. */
   public void play() {
-
-    String playerFingers = "-1";
-    String computerFingers = randomStrategy.selectFingers();
-    int sum;
-
     roundNum += 1;
+    String playerFingers = "-1";
+    String computerFingers = diffType.getFingers();
+    int roundTotal;
 
     MessageCli.START_ROUND.printMessage(String.valueOf(roundNum));
     while (playerFingers.equals("-1")) {
@@ -49,18 +48,20 @@ public class Game {
       } else {
         playerFingers = input;
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
+        TopStategy.addFingers(Integer.parseInt(playerFingers));
+
         MessageCli.PRINT_INFO_HAND.printMessage(computerName, computerFingers);
-        sum = Integer.parseInt(playerFingers) + Integer.parseInt(computerFingers);
-        findWinner(sum);
+        roundTotal = Integer.parseInt(playerFingers) + Integer.parseInt(computerFingers);
+        findWinner(roundTotal);
       }
     }
   }
 
-/**
- * Determines the winner of the round.
- * 
- * @param sum
- */
+  /**
+   * Determines the winner of the round.
+   *
+   * @param sum
+   */
   public void findWinner(int sum) {
     if (choice == Choice.ODD) {
       if (Utils.isOdd(sum)) {
