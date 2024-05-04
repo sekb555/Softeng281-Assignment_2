@@ -117,6 +117,9 @@ public class Game {
   public void showStats() {
     if (gameState == 0){
       MessageCli.GAME_NOT_STARTED.printMessage();
-    } 
+    } else if (gameState == 1){
+      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWins), String.valueOf(compWins));
+      MessageCli.PRINT_PLAYER_WINS.printMessage(computerName, String.valueOf(compWins), String.valueOf(playerWins));
+    }
   }
 }
