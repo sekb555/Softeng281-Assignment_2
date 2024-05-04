@@ -2,12 +2,12 @@ package nz.ac.auckland.se281;
 
 public class DiffFactory {
 
-  public DiffInterface createDiff(String diffType) {
+  public DiffInterface createDiff(String diffType, int roundNum) {
 
     if (diffType.equalsIgnoreCase("Easy")) {
       return new EasyDiff();
     } else if (diffType.equalsIgnoreCase("Medium")) {
-      return new EasyDiff();
+      return new MedDiff(roundNum);
     } else {
       return null;
     }

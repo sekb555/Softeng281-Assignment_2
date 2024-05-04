@@ -6,7 +6,7 @@ public class TopStategy implements Strategy{
 
 
   private static int sum;
-  private Choice choice;
+  private static Choice choice;
 
   public static void addFingers(int fingers) {
     boolean even = Utils.isEven(fingers);
@@ -17,8 +17,8 @@ public class TopStategy implements Strategy{
     }
   }
 
-  public void setChoice(Choice choice) {
-    this.choice = choice;
+  public void setChoice(Choice newChoice) {
+    choice = newChoice;
   }
 
   public static void clear(){

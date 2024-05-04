@@ -29,12 +29,12 @@ public class Game {
     this.roundNum = 0;
     TopStategy.clear();
     new TopStategy().setChoice(choice);
-    diffType = new DiffFactory().createDiff(diffString);
   }
 
   /** Plays a round of the game. */
   public void play() {
     roundNum += 1;
+    diffType = new DiffFactory().createDiff(diffString, roundNum);
     String playerFingers = "-1";
     String computerFingers = diffType.getFingers();
     int roundTotal;
