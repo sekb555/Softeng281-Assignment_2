@@ -13,6 +13,7 @@ public class Game {
   private int roundNum;
   private DiffInterface diffType;
   private String lastWinner;
+  private int winnerTally;
   private int gameState;
 
   /**
@@ -90,9 +91,18 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", computerName);
       }
     }
+
+    if (lastWinner.equals("P")) {
+      winnerTally += 1;
+    } else if (lastWinner.equals("C")) {
+      winnerTally -= 1;
+    }
   }
 
   public void endGame() {
+    if (winnerTally < 0) {
+      MessageCli.PRINT_END_GAME.printMessage(computerName);
+    }
     gameState = 0;
   }
 
