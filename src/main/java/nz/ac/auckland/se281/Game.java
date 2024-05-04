@@ -13,7 +13,6 @@ public class Game {
   private int roundNum;
   private DiffInterface diffType;
   private String lastWinner;
-  private int winnerTally;
   private int playerWins;
   private int compWins;
   private int gameState;
@@ -102,7 +101,16 @@ public class Game {
   }
 
   public void endGame() {
-    winnerTally = playerWins - compWins;
+    int winnerTally = playerWins - compWins;
+
+    if (gameState == 0){
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    } else if (gameState == 1){
+      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWins), String.valueOf(compWins));
+      MessageCli.PRINT_PLAYER_WINS.printMessage(computerName, String.valueOf(compWins), String.valueOf(playerWins));
+    }
+
 
     if (winnerTally < 0) {
       MessageCli.PRINT_END_GAME.printMessage(computerName);
@@ -111,12 +119,14 @@ public class Game {
     } else {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
+
     gameState = 0;
   }
 
   public void showStats() {
     if (gameState == 0){
       MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
     } else if (gameState == 1){
       MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWins), String.valueOf(compWins));
       MessageCli.PRINT_PLAYER_WINS.printMessage(computerName, String.valueOf(compWins), String.valueOf(playerWins));
