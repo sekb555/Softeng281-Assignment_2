@@ -102,6 +102,10 @@ public class Game {
   public void endGame() {
     if (winnerTally < 0) {
       MessageCli.PRINT_END_GAME.printMessage(computerName);
+    } else if (winnerTally > 0) {
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    } else {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
     gameState = 0;
   }
