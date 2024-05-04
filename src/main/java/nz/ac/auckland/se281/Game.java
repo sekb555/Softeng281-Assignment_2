@@ -14,6 +14,8 @@ public class Game {
   private DiffInterface diffType;
   private String lastWinner;
   private int winnerTally;
+  private int playerWins;
+  private int compWins;
   private int gameState;
 
   /**
@@ -93,13 +95,15 @@ public class Game {
     }
 
     if (lastWinner.equals("P")) {
-      winnerTally += 1;
+      playerWins++;
     } else if (lastWinner.equals("C")) {
-      winnerTally -= 1;
+      compWins++;
     }
   }
 
   public void endGame() {
+    winnerTally = playerWins - compWins;
+
     if (winnerTally < 0) {
       MessageCli.PRINT_END_GAME.printMessage(computerName);
     } else if (winnerTally > 0) {
@@ -110,5 +114,9 @@ public class Game {
     gameState = 0;
   }
 
-  public void showStats() {}
+  public void showStats() {
+    if (gameState == 0){
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    } 
+  }
 }
