@@ -20,9 +20,9 @@ public class Game {
   /**
    * Starts a new game. This method initializes the game variables and allows gameplay to begin.
    *
-   * @param difficulty
-   * @param choice
-   * @param options
+   * @param difficulty The difficulty of the game which is chosen by the player.
+   * @param choice choice that the player makes to determine what wins the round.
+   * @param options allows the player to input their name.
    */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // initializes game variables and sets logic set by player
@@ -41,7 +41,9 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
   }
 
-  /** Plays a round of the game. */
+  /**
+   * Plays a round of the game. using the player's input and the AI's input to determine the winner.
+   */
   public void play() {
     roundNum += 1;
     // checks if the game has started or not
@@ -80,35 +82,42 @@ public class Game {
    * Assists in determining the winner of the round. By checking if the sum favours the player or
    * the AI.
    *
-   * @param sum
+   * @param sum The sum of the player and AI's inputs to determine the winner. based on the player's
+   *     choice at the start of the game
    */
   public void findWinner(int sum) {
+    // checks if the sum is odd or even and determines the winner of the round
     if (choice == Choice.ODD) {
       if (Utils.isOdd(sum)) {
-        lastWinner = "P";
+        lastWinner = "Player";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
       } else {
-        lastWinner = "C";
+        lastWinner = "Computer";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", computerName);
       }
     } else if (choice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
-        lastWinner = "P";
+        lastWinner = "Player";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
       } else {
-        lastWinner = "C";
+        lastWinner = "Computer";
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", computerName);
       }
     }
 
-    if (lastWinner.equals("P")) {
+    // updates the number of times the player or the computer has won depending on the winner of the
+    // round
+    if (lastWinner.equals("Player")) {
       playerWins++;
-    } else if (lastWinner.equals("C")) {
+    } else if (lastWinner.equals("Computer")) {
       compWins++;
     }
   }
 
-  /** Ends the game and prints the winner. */
+  /**
+   * Ends the game and prints the winner and the stats of the game that was just played such as the
+   * number of rounds won by each player.
+   */
   public void endGame() {
     // intializes the winnerTally variable to determine the winner of the full game
     int winnerTally = playerWins - compWins;
@@ -129,7 +138,10 @@ public class Game {
     gameState = 0;
   }
 
-  /** Shows the stats of the current game. */
+  /**
+   * Shows the stats of the current game. If the game has not started yet, it will print an error
+   * message.
+   */
   public void showStats() {
     // prints the stats of the game
     if (gameState == 0) {
