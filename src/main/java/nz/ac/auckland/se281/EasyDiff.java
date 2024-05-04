@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** A easy difficulty for the AI. This difficulty uses the random strategy to send an input. */
 public class EasyDiff implements DiffInterface {
 
   /**

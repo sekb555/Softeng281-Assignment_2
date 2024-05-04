@@ -1,5 +1,9 @@
 package nz.ac.auckland.se281;
 
+/**
+ * A hard difficulty for the AI. This difficulty uses the random strategy for the first 3 rounds and
+ * then switches between the random and top strategy depending on the winner of the last round.
+ */
 public class HardDiff implements DiffInterface {
 
   private int roundNum;

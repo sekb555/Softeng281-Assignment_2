@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** A factory class that helps set the difficulty of the AI. */
 public class DiffFactory {
 
   /**

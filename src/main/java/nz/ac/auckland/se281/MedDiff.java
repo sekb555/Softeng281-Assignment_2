@@ -1,5 +1,9 @@
 package nz.ac.auckland.se281;
 
+/**
+ * A medium difficulty for the AI. This difficulty uses the random strategy for the first 3 rounds
+ * and then switches to the top strategy.
+ */
 public class MedDiff implements DiffInterface {
 
   private int roundNum;
