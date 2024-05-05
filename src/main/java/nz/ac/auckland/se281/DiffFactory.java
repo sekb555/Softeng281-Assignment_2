@@ -12,7 +12,8 @@ public class DiffFactory {
    * @param lastWinner the last winner of the game
    * @return returns the difficulty type that the player has chosen
    */
-  public DiffInterface createDiff(String diffType, int roundNum, String lastWinner) {
+  public DiffInterface createDiff(
+      String diffType, int roundNum, String lastWinner, Strategy strategy) {
 
     // checks the difficulty type and returns the appropriate difficulty
     if (diffType.equalsIgnoreCase("Easy")) {
@@ -20,7 +21,7 @@ public class DiffFactory {
     } else if (diffType.equalsIgnoreCase("Medium")) {
       return new MedDiff(roundNum);
     } else if (diffType.equalsIgnoreCase("Hard")) {
-      return new HardDiff(roundNum, lastWinner);
+      return new HardDiff(roundNum, lastWinner, strategy);
     } else {
       return null;
     }

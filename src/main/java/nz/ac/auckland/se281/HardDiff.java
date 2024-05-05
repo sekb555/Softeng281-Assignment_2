@@ -10,6 +10,7 @@ public class HardDiff implements DiffInterface {
   private String lastWinner;
   private TopStategy top = new TopStategy();
   private RandomStrategy rand = new RandomStrategy();
+  private Strategy current;
 
   /**
    * Constructor for the hard difficulty. to get the current round number and the last winner of the
@@ -18,9 +19,17 @@ public class HardDiff implements DiffInterface {
    * @param roundNum gets the current round number
    * @param lastWinner gets the last winner of the round to determine which strategy to use
    */
-  public HardDiff(int roundNum, String lastWinner) {
+  public HardDiff(int roundNum, String lastWinner, Strategy strategy) {
     this.roundNum = roundNum;
     this.lastWinner = lastWinner;
+
+    if (strategy == null) {
+      this.current = rand;
+    } else if (strategy instanceof RandomStrategy) {
+      this.current = rand;
+    } else if (strategy instanceof TopStategy) {
+      this.current = top;
+    }
   }
 
   /**
@@ -30,8 +39,6 @@ public class HardDiff implements DiffInterface {
    */
   @Override
   public String getFingers() {
-    // initialize the current strategy to random
-    Strategy current = rand;
     // uses random strategy for the first 3 rounds and swtiches between top and random strategy
     // depending on if the player or the computer won the last round
     if (roundNum <= 3) {
@@ -48,5 +55,11 @@ public class HardDiff implements DiffInterface {
     }
     // returns the selected fingers based on the currently selected strategy
     return current.selectFingers();
+  }
+
+  /** Gets the current strategy that the AI is using. */
+  @Override
+  public Strategy getStrategy() {
+    return current;
   }
 }

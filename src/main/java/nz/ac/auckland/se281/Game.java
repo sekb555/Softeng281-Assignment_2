@@ -16,6 +16,7 @@ public class Game {
   private int playerWins;
   private int compWins;
   private int gameState = 0;
+  private Strategy currentStrategy;
 
   /**
    * Starts a new game. This method initializes the game variables and allows gameplay to begin.
@@ -36,6 +37,7 @@ public class Game {
     TopStategy.clear();
     new TopStategy().setChoice(choice);
     gameState = 1;
+    currentStrategy = null;
 
     // prints welcome message to the player
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
@@ -52,7 +54,7 @@ public class Game {
       return;
     }
     // creates a new dificulty object based on the player's choice
-    diffType = new DiffFactory().createDiff(diffString, roundNum, lastWinner);
+    diffType = new DiffFactory().createDiff(diffString, roundNum, lastWinner, currentStrategy);
     String playerFingers = "-1";
     String computerFingers = diffType.getFingers();
     int roundTotal;
@@ -76,6 +78,7 @@ public class Game {
         findWinner(roundTotal);
       }
     }
+    currentStrategy = diffType.getStrategy();
   }
 
   /**

@@ -10,6 +10,7 @@ public class TopStategy implements Strategy {
 
   private static int sum;
   private static Choice choice;
+
   /**
    * Adds the fingers to the sum to keep track of the amount of odd and even inputs that the human
    * has given so that the AI can make a decision to increase chances of winning.
@@ -17,7 +18,8 @@ public class TopStategy implements Strategy {
    * @param fingers gets the number of finngers that the player has inputed and add it to the sum
    */
   public static void addFingers(int fingers) {
-    // checks if the number of fingers is even or odd to add to the sum  to keep track of the amount of even and odd inputs
+    // checks if the number of fingers is even or odd to add to the sum  to keep track of the amount
+    // of even and odd inputs
     boolean even = Utils.isEven(fingers);
     if (even == true) {
       sum += 1;
@@ -42,10 +44,11 @@ public class TopStategy implements Strategy {
    * @param newChoice gets the choice that the player has made at the start of the game
    */
   public void setChoice(Choice newChoice) {
-    //sets the choise at the start of a round
+
+    // sets the choise at the start of a round
     choice = newChoice;
   }
-  
+
   /**
    * Code for the AI to select an input to give its self better odds. when accompanied with hard
    * difficulty code AI becomes harder to beat
@@ -67,9 +70,9 @@ public class TopStategy implements Strategy {
         return String.valueOf(Utils.getRandomOddNumber());
       }
     }
-    // if the player has not selected even or odd then the AI will select a random number(although this in not possible)
+
+    // if the player has not selected even or odd then the AI will select a random number(although
+    // this in not possible)
     return String.valueOf(Utils.random.nextInt(6));
   }
-
-
 }

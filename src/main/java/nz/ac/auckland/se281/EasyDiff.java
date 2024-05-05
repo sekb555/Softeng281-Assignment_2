@@ -11,4 +11,10 @@ public class EasyDiff implements DiffInterface {
   public String getFingers() {
     return new RandomStrategy().selectFingers();
   }
+
+  /** Gets the current strategy that the AI is using. */
+  @Override
+  public Strategy getStrategy() {
+    return null;
+  }
 }
