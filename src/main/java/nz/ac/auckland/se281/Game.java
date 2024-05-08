@@ -131,6 +131,12 @@ public class Game {
    * number of rounds won by each player.
    */
   public void endGame() {
+    // checks if the game has started or not it cannot end if it has not started
+    if (gameState == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
     // intializes the winnerTally variable to determine the winner of the full game
     int winnerTally = playerWins - compWins;
 
