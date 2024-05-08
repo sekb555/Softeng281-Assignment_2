@@ -16,6 +16,7 @@ public class Game {
   private int playerWins;
   private int compWins;
   private int gameState = 0;
+  private int sum;
   private Strategy currentStrategy;
 
   /**
@@ -34,8 +35,7 @@ public class Game {
     this.playerName = options[0];
     this.choice = choice;
     diffString = difficulty.toString();
-    TopStategy.clear();
-    new TopStategy().setChoice(choice);
+    sum = 0;
     gameState = 1;
     currentStrategy = null;
 
@@ -54,7 +54,9 @@ public class Game {
       return;
     }
     // creates a new dificulty object based on the player's choice
-    diffType = new DiffFactory().createDiff(diffString, roundNum, lastWinner, currentStrategy);
+    diffType =
+        new DiffFactory()
+            .createDiff(diffString, roundNum, lastWinner, currentStrategy, sum, choice);
     String playerFingers = "-1";
     String computerFingers = diffType.getFingers();
     int roundTotal;
@@ -71,8 +73,15 @@ public class Game {
         MessageCli.INVALID_INPUT.printMessage();
       } else {
         playerFingers = input;
+        // checks if the number of fingers is even or odd to add to the sum to keep track of the
+        // amount
+        // of even and odd inputs
+        if (Utils.isEven(Integer.parseInt(playerFingers)) == true) {
+          sum += 1;
+        } else if (Utils.isEven(Integer.parseInt(playerFingers)) == false) {
+          sum -= 1;
+        }
         MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerFingers);
-        TopStategy.addFingers(Integer.parseInt(playerFingers));
         MessageCli.PRINT_INFO_HAND.printMessage(computerName, computerFingers);
         roundTotal = Integer.parseInt(playerFingers) + Integer.parseInt(computerFingers);
         findWinner(roundTotal);

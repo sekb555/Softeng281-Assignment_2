@@ -8,33 +8,12 @@ import nz.ac.auckland.se281.Main.Choice;
  */
 public class TopStategy implements Strategy {
 
-  private static int sum;
-  private static Choice choice;
+  private int sum;
+  private Choice choice;
 
-  /**
-   * Adds the fingers to the sum to keep track of the amount of odd and even inputs that the human
-   * has given so that the AI can make a decision to increase chances of winning.
-   *
-   * @param fingers gets the number of finngers that the player has inputed and add it to the sum
-   */
-  public static void addFingers(int fingers) {
-    // checks if the number of fingers is even or odd to add to the sum  to keep track of the amount
-    // of even and odd inputs
-    boolean even = Utils.isEven(fingers);
-    if (even == true) {
-      sum += 1;
-    } else if (even == false) {
-      sum -= 1;
-    }
-  }
-
-  /**
-   * Clears the sum. This is used for when a new game is starting and the sum needs to be clear as
-   * the player could have changed
-   */
-  public static void clear() {
-    // resets the sum back to 0
-    sum = 0;
+  public TopStategy(int sum, Choice choice) {
+    this.sum = sum;
+    this.choice = choice;
   }
 
   /**
@@ -45,7 +24,7 @@ public class TopStategy implements Strategy {
    */
   public void setChoice(Choice newChoice) {
 
-    // sets the choise at the start of a round
+    // sets the choice at the start of a round
     choice = newChoice;
   }
 
