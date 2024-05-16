@@ -38,9 +38,9 @@ public class MedDiff implements DiffInterface {
     Strategy rand = new RandomStrategy();
     // code for switching to top strategy after the 3rd round
     if (roundNum <= 3) {
-      diffStrategy.SetStrategy(rand);
+      diffStrategy.setStrategy(rand);
     } else {
-      diffStrategy.SetStrategy(top);
+      diffStrategy.setStrategy(top);
     }
     Strategy current = diffStrategy.getStrategy();
     return current.selectFingers();

@@ -31,11 +31,11 @@ public class HardDiff implements DiffInterface {
     this.lastWinner = lastWinner;
 
     if (strategy == null) {
-      diffStrategy.SetStrategy(rand);
+      diffStrategy.setStrategy(rand);
     } else if (strategy instanceof RandomStrategy) {
-      diffStrategy.SetStrategy(rand);
+      diffStrategy.setStrategy(rand);
     } else if (strategy instanceof TopStategy) {
-      diffStrategy.SetStrategy(top);
+      diffStrategy.setStrategy(top);
     }
     current = diffStrategy.getStrategy();
   }
