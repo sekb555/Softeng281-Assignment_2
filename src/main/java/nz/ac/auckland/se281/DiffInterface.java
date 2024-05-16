@@ -5,4 +5,5 @@ public interface DiffInterface {
   public String getFingers();
 
   public Strategy getStrategy();
+
 }

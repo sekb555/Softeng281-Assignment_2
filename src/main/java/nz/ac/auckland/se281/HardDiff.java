@@ -10,8 +10,9 @@ public class HardDiff implements DiffInterface {
 
   private int roundNum;
   private String lastWinner;
-  private TopStategy top;
-  private RandomStrategy rand = new RandomStrategy();
+  private Strategy top;
+  private Strategy rand = new RandomStrategy();
+  private DiffStrategy diffStrategy = new DiffStrategy();
   private Strategy current;
 
   /**
@@ -30,12 +31,13 @@ public class HardDiff implements DiffInterface {
     this.lastWinner = lastWinner;
 
     if (strategy == null) {
-      this.current = rand;
+      diffStrategy.SetStrategy(rand);
     } else if (strategy instanceof RandomStrategy) {
-      this.current = rand;
+      diffStrategy.SetStrategy(rand);
     } else if (strategy instanceof TopStategy) {
-      this.current = top;
+      diffStrategy.SetStrategy(top);
     }
+    current = diffStrategy.getStrategy();
   }
 
   /**

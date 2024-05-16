@@ -11,6 +11,7 @@ public class MedDiff implements DiffInterface {
   private int roundNum;
   private int sum;
   private Choice choice;
+  private DiffStrategy diffStrategy = new DiffStrategy();
 
   /**
    * Constructor for the medium difficulty of the AI for the player to play againest.
@@ -33,14 +34,16 @@ public class MedDiff implements DiffInterface {
   public String getFingers() {
     // initializes the top and random strategies and asssigns them short names to make them easier
     // to use
-    TopStategy top = new TopStategy(sum, choice);
-    RandomStrategy rand = new RandomStrategy();
+    Strategy top = new TopStategy(sum, choice);
+    Strategy rand = new RandomStrategy();
     // code for switching to top strategy after the 3rd round
     if (roundNum <= 3) {
-      return rand.selectFingers();
+      diffStrategy.SetStrategy(rand);
     } else {
-      return top.selectFingers();
+      diffStrategy.SetStrategy(top);
     }
+    Strategy current = diffStrategy.getStrategy();
+    return current.selectFingers();
   }
 
   /** Gets the current strategy that the AI is using. */
